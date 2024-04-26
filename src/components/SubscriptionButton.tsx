@@ -18,9 +18,17 @@ const SubscriptionButton = (props: Props) => {
       setLoading(false);
     }
   };
+
+  // Estilo para el texto del botón
+  const buttonTextStyles = {
+    color: "black", // Cambia este valor al color deseado (por ejemplo, "white" para blanco)
+  };
+
   return (
     <Button disabled={loading} onClick={handleSubscription} variant="outline">
-      {props.isPro ? "Manage Subscriptions" : "Get Pro"}
+      <span style={buttonTextStyles}>
+        {props.isPro ? "Manage Subscriptions" : "Get Pro"}
+      </span>
     </Button>
   );
 };

@@ -8,6 +8,7 @@ import MessageList from "./MessageList";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Message } from "ai";
+import SubscriptionButton from "./SubscriptionButton";
 
 type Props = { chatId: number };
 
@@ -66,6 +67,8 @@ const ChatComponent = ({ chatId }: Props) => {
             <Send className="h-4 w-4" />
           </Button>
         </div>
+        
+        
       </form>
     </div>
   );

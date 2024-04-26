@@ -18,32 +18,31 @@ const ChatSideBar = ({ chats, chatId, isPro }: Props) => {
   const [loading, isLoading] = React.useState(false);
 
   return (
-    <div className="w-full h-screen overflow-auto p-4 text-gray-200 bg-gray-900">
+    <div className="w-full h-full overflow-auto p-4 text-gray-200 bg-gray-900">
       <Link href="/">
         <Button className="w-full border-dashed border-white border">
-          <PlusCircle className="mr-2 w- h-4" />
-          New Chat
+          <PlusCircle className="mr-4 w- h-4" />
+          Nuevo Chat
         </Button>
       </Link>
 
-      <div className="h-full overflow-y-auto pb-20 flex flex-col gap-2 mt-1">
+      <div className="h-full overflow-y-auto pb- flex flex-col gap-2 mt-1">
         {chats.map((chat) => (
           <Link key={chat.id} href={`/chat/${chat.id}`}>
             <div
-              className={cn("rounded-lg p-3 text-slate-300 flex items-center", {
+              className={cn("rounded-lg p-3 text-slate-100 flex items-center", {
                 "bg-blue-600 text-white": chat.id === chatId,
                 "hover:text-white": chat.id !== chatId,
               })}
             >
-              <MessageCircle className="mr-2" />
-              <p className="w-full overflow-hidden text-sm truncate whitespace-nowrap text-ellipsis">
+              <MessageCircle className="mr-" />
+              <p className="w-full  text-sm truncate whitespace-nowrap text-ellipsis">
                 {chat.pdfName}
               </p>
             </div>
           </Link>
         ))}
       </div>
-
       {/* Agrega el botón SubscriptionButton */}
       <SubscriptionButton isPro={isPro} />
     </div>

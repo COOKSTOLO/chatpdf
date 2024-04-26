@@ -9,40 +9,48 @@ import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import React from "react";
 
+// Define the Props type
 type Props = {
   params: {
     chatId: string;
   };
 };
 
+// Create the ChatPage component
 const ChatPage = async ({ params: { chatId } }: Props) => {
+  // Authenticate the user
   const { userId } = await auth();
   if (!userId) {
     return redirect("/sign-in");
   }
+
+  
   const _chats = await db.select().from(chats).where(eq(chats.userId, userId));
   if (!_chats) {
     return redirect("/");
   }
+
+  
   if (!_chats.find((chat) => chat.id === parseInt(chatId))) {
     return redirect("/");
   }
 
+  
   const currentChat = _chats.find((chat) => chat.id === parseInt(chatId));
   const isPro = await checkSubscription();
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen w-full">
       <div className="flex w-full h-full">
-        {/* chat sidebar */}
-        <div className="w-1/4 h-full overflow-auto">
+        {/* Chat sidebar */}
+        <div className="w-1/4 h-full overflow-auto border-l-4 border-l-slate-200">
           <ChatSideBar chats={_chats} chatId={parseInt(chatId)} isPro={isPro} />
         </div>
-        {/* pdf viewer */}
+        {/* PDF viewer */}
         <div className="w-1/2 h-full overflow-auto p-4">
           <PDFViewer pdf_url={currentChat?.pdfUrl || ""} />
         </div>
-        {/* chat component */}
+        {/* Chat component */}
         <div className="w-1/4 h-full overflow-auto border-l-4 border-l-slate-200">
           <ChatComponent chatId={parseInt(chatId)} />
         </div>

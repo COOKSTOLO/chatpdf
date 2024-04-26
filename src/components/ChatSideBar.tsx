@@ -3,7 +3,7 @@ import { DrizzleChat } from "@/lib/db/schema";
 import Link from "next/link";
 import React from "react";
 import { Button } from "./ui/button";
-import { MessageCircle, PlusCircle } from "lucide-react";
+import { MessageCircle, PlusCircle, Home } from "lucide-react"; // Added the Home icon
 import { cn } from "@/lib/utils";
 import axios from "axios";
 import SubscriptionButton from "./SubscriptionButton";
@@ -26,7 +26,18 @@ const ChatSideBar = ({ chats, chatId, isPro }: Props) => {
         </Button>
       </Link>
 
-      <div className="h-full overflow-y-auto pb- flex flex-col gap-2 mt-1">
+      <div className="h-full overflow-y-auto pb- flex flex-col gap-4 mt-4">
+        <div className="absolute bottom-2 left-2">
+          <div className="rounded-lg p-3 text-slate-100 flex items-center">
+            <Link href="/">
+              <Home className="mr-8 w-7 h-5" /> {/* Added the Home icon */}
+              
+            </Link>
+          </div>
+        </div>
+        <div className="absolute bottom-2 right-2">
+          <SubscriptionButton isPro={isPro} />
+        </div>
         {chats.map((chat) => (
           <Link key={chat.id} href={`/chat/${chat.id}`}>
             <div
@@ -36,15 +47,13 @@ const ChatSideBar = ({ chats, chatId, isPro }: Props) => {
               })}
             >
               <MessageCircle className="mr-" />
-              <p className="w-full  text-sm truncate whitespace-nowrap text-ellipsis">
+              <p className="w-full text-sm truncate whitespace-nowrap text-ellipsis">
                 {chat.pdfName}
               </p>
             </div>
           </Link>
         ))}
       </div>
-      {/* Agrega el botón SubscriptionButton */}
-      <SubscriptionButton isPro={isPro} />
     </div>
   );
 };

@@ -22,6 +22,9 @@ const SubscriptionButton = (props: Props) => {
   // Estilo para el texto del botón
   const buttonTextStyles = {
     color: "black", // Cambia este valor al color deseado (por ejemplo, "white" para blanco)
+    border: "1px solid black", // Agrega un borde negro (contorno) alrededor del texto
+    padding: "5px 10px", // Ajusta el relleno según sea necesario
+    borderRadius: "5px", // Agrega esquinas redondeadas
   };
 
   return (
